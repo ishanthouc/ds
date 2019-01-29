@@ -36,7 +36,7 @@ print "cordinates are ",reg_obj.cord
 eval_param=ep(reg_obj)
 
 print "the r squared value is ", eval_param.R_squared()
-print "the standard error is ",eval_param.calculate_stder()
+print "the standard error is ",eval_param.calculate_stder()o
 
 obfx=fx(Y)
 ot=obfx.min_max_norm()

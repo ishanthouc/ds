@@ -5,6 +5,8 @@ Created on Mon Jan 22 2019
 
 import numpy as np
 import pandas as pd
+
+
 class FeatureExtration:
     
     def __init__(self,table):
@@ -48,5 +50,37 @@ class FeatureExtration:
         col=pd.DataFrame({'col':self.outputs})
         return col
         
+    def log_transform(self):
         
+        for x in range(self.tables.size):
+            self.outputs[x]=math.log10(self.tables[x])
+        col=pd.DataFrame({'col':self.outputs})
+        return col
+
+
+    def calc_mean(self):
+        mean=0
+        for x in range(self.tables.size):
+            mean=mean+self.tables[x]
+        mean=mean/self.tables.size
+        return mean
+    def calc_deviation(self):
+        mean=calc_mean()
+        dev=0
+        for x in range(self.tables.size):
+            dev=dev+((self.tables[x]-mean)*(self.tables[x]-mean))
+        dev=dev/self.tables.size
+        dev=(dev)**0.5
+        return dev
+    
+    def standaradization(self):
+
+        dev=calc_deviation()
+        mean=calc_mean()
+        for x in range(self.tables.size):
+            self.outputs[x]=(self.tables[x]-mean)/dev
+
+        col=pd.DataFrame({'col':self.outputs})
+        return col
+
         

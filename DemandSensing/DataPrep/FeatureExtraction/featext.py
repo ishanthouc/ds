@@ -5,14 +5,14 @@ Created on Mon Jan 22 2019
 
 import numpy as np
 import pandas as pd
-
+import tsfresh as ts
 
 class FeatureExtration:
     
     def __init__(self,table):
         #the given from which the features needs to be extracted
         self.tables=table.values
-        self.outputs=np.ones(self.tables.size,dtype=np.float32)
+        self.outputs=np.zeros(self.tables.size,dtype=np.float32)
     def rolling_average(self,window=3): 
         #code for the rolling average of the given column and retrun the output table with same no ofrows
         #self.window=window
@@ -83,4 +83,11 @@ class FeatureExtration:
         col=pd.DataFrame({'col':self.outputs})
         return col
 
+    def lag_features(self,lag_len):
+
+        for x in range(self.tables.size):
+            self.outputs[x+lag_len]=self.tables[x]
+
         
+        col=pd.DataFrame({'col':self.outputs})
+        return col
